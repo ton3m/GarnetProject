@@ -1,10 +1,11 @@
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.LoadingCurtainService;
 using UnityEngine;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Root
 {
     public class UIRootView : MonoBehaviour
     {
-        [SerializeField] private GameObject _loadingCurtain;
+        [SerializeField] private LoadingCurtain _loadingCurtain;
         [SerializeField] private Transform _uiSceneContainer;
 
         private void Awake()
@@ -14,12 +15,12 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
 
         public void ShowLoadingCurtain()
         {
-            _loadingCurtain.SetActive(true);
+            _loadingCurtain.Show();
         }
     
         public void HideLoadingCurtain()
         {
-            _loadingCurtain.SetActive(false);
+            _loadingCurtain.Hide();
         }
 
         public void AttachSceneUI(GameObject sceneUI)

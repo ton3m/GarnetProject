@@ -1,10 +1,10 @@
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Constants;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Root;
-using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using GarnnetProject.Assets.CodeBase.Runtime.App.Root;
+using GarnnetProject.Assets.CodeBase.Runtime.Game;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Root
 {
@@ -67,7 +67,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
             yield return LoadScene(Scenes.BOOT);
             yield return LoadScene(Scenes.GAME);
 
-            yield return new WaitForSeconds(1); // просто задержка
+            // yield return new WaitForSeconds(1); // просто задержка
 
 			var gameplayEntryPoint = Object.FindFirstObjectByType<GameplayEntryPoint>();
 			gameplayEntryPoint.Run(_uiRoot); // передача DI в этом месте
@@ -87,7 +87,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
             yield return LoadScene(Scenes.BOOT);
             yield return LoadScene(Scenes.MAIN_APP);
 
-            yield return new WaitForSeconds(1);  // просто задержка
+            // yield return new WaitForSeconds(1);  // просто задержка
 
             var gameplayEntryPoint = Object.FindFirstObjectByType<AppEntryPoint>();
 			gameplayEntryPoint.Run(_uiRoot); // передача DI в этом месте

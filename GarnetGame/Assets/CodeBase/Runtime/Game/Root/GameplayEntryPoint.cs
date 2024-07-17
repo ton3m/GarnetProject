@@ -2,7 +2,7 @@ using GarnnetProject.Assets.CodeBase.Runtime.Root;
 using System;
 using UnityEngine;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Root
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
