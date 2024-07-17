@@ -2,7 +2,7 @@ using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem;
 using UnityEngine;
 using VContainer;
 
-namespace GarnnetProject
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
 {
     public class Shop : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace GarnnetProject
         {
             _inventory.TryAdd(_firstItemData);
         }
-    
+
         public void IncreaseSecondItem()
         {
             _inventory.TryAdd(_secondItemData);
