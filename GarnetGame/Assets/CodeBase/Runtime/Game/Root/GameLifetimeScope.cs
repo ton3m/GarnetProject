@@ -17,10 +17,6 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 
         protected override void Configure(IContainerBuilder builder)
         {
-            var input = new InputHandler();
-            input.Actions.Enable();
-            builder.RegisterInstance(input).AsImplementedInterfaces().AsSelf();
-
             builder.Register<Inventory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             // registration for injection

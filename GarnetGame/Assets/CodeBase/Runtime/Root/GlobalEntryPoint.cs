@@ -42,7 +42,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
 
 			if (currentSceneName == Scenes.GAME)
             {
-                _coroutines.StartCoroutine(LoadAndStartGame());
+                _coroutines.StartCoroutine(LoadFirstScene(Scenes.GAME));
 				return;
             }
 
@@ -53,21 +53,34 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
 
             if (currentSceneName == Scenes.MAIN_APP)
             {
-                _coroutines.StartCoroutine(LoadAndStartMainApp());
+                _coroutines.StartCoroutine(LoadFirstScene(Scenes.MAIN_APP));
             }
 #endif
 
-            _coroutines.StartCoroutine(LoadAndStartMainApp());
+            _coroutines.StartCoroutine(LoadFirstScene(Scenes.MAIN_APP));
+        }
+
+        private IEnumerator LoadFirstScene(string SceneToLoad)
+        {
+            yield return LoadScene(Scenes.BOOT);
+            yield return LoadScene(Scenes.GAME);
+
+			var gameplayEntryPoint = Object.FindFirstObjectByType<GameplayEntryPoint>();
+			gameplayEntryPoint.Run(_uiRoot); // передача DI в этом месте
+
+			gameplayEntryPoint.GoToMainAppSceneRequested += () =>
+            {
+                _coroutines.StartCoroutine(LoadAndStartMainApp());
+            };
+
+			_uiRoot.HideLoadingCurtain();
         }
 
         private IEnumerator LoadAndStartGame()
         {
 			_uiRoot.ShowLoadingCurtain();
-
-            yield return LoadScene(Scenes.BOOT);
+            
             yield return LoadScene(Scenes.GAME);
-
-            // yield return new WaitForSeconds(1); // просто задержка
 
 			var gameplayEntryPoint = Object.FindFirstObjectByType<GameplayEntryPoint>();
 			gameplayEntryPoint.Run(_uiRoot); // передача DI в этом месте
@@ -84,10 +97,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
         {
             _uiRoot.ShowLoadingCurtain();
 
-            yield return LoadScene(Scenes.BOOT);
             yield return LoadScene(Scenes.MAIN_APP);
-
-            // yield return new WaitForSeconds(1);  // просто задержка
 
             var gameplayEntryPoint = Object.FindFirstObjectByType<AppEntryPoint>();
 			gameplayEntryPoint.Run(_uiRoot); // передача DI в этом месте

@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: GarnnetProject.AppLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _inventoryViewController: {fileID: 1126834730}
@@ -985,7 +985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &602989239
 RectTransform:
   m_ObjectHideFlags: 0

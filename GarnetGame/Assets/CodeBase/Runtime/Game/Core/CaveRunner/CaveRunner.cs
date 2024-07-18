@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem;
 using UnityEngine;
 using PrimeTween;
-using System.Threading.Tasks;
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool;
 
-namespace GarnnetProject
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
 {
     public class CaveRunner : MonoBehaviour
     {
@@ -15,13 +14,17 @@ namespace GarnnetProject
         [SerializeField] private Transform _layerMoveEndPoisition;
         [SerializeField] private float _moveDuration = 0.2f;
         private Layer _currentLayer;
-        private LayerPool _pool;
+        private ObjectPool<Layer> _pool;
         private LayerGenerator _generator;
-        private bool _isMoveLayerEnable;
         private bool _isInited;
 
-        [ContextMenu("Begin")]
         public void Begin()
+        {
+            if (!_isInited)
+                Init();
+        }
+
+        private void Init() // set with loading curtain
         {
             _generator = new LayerGenerator();
             Layer[] layerObjects = _generator.Create(_layerPrefab, 4, _layerParent);
@@ -31,87 +34,60 @@ namespace GarnnetProject
                 layer.LayerDestroyed += OnLayerDestroyed;
             }
 
-            _pool = new LayerPool(layerObjects);
-
-            _isMoveLayerEnable = true;
+            _pool = new ObjectPool<Layer>(layerObjects);
             _isInited = true;
-            MoveNewCurrentLayer();
+
+            SetNewCurrentLayer();
         }
 
-        public void Init()
+        public void SetNewCurrentLayer()
         {
-            // show loading screen
-            //
-            // generate layers for pool
-            //      subscribe for destroy event += LeyerDestroyed()
-            //
-            // set first layer
-            // set right coords
-            // 
-            // hide loading screen
+            if(!IsCapableToSetNewCurrentLayer())
+                return;
 
-            if(!_isInited)
-                Begin();
+            _currentLayer = _pool.GetPool();
 
-            // hide loading curtain
+            StartCoroutine(MoveCurrentLayerToPlayer());
+        }
+
+        private IEnumerator MoveCurrentLayerToPlayer()
+        {
+            SetUpNewCurrentLayer();
+
+            yield return Tween.PositionZ(_currentLayer.transform, endValue: _layerMoveEndPoisition.position.z, duration: _moveDuration)
+                .ToYieldInstruction();
+
+            _currentLayer.Init();
         }
 
         public void OnLayerDestroyed()
         {
-            // play destroy animation
-            // pool back the layer
-            // ....
-            // show choice to move forward and spend one more railroad
-            //   remove one railroad from inventory
-            // set next layer in distance step
-            // play move forward animation in one step
+            //play destroy animation
 
-            _currentLayer.gameObject.SetActive(false);
+            _pool.ReturnPool(_currentLayer);
             _currentLayer = null;
-            _isMoveLayerEnable = true;
+
+            SetNewCurrentLayer(); // cyclic
         }
-    
-        private void SetStartPosition()
+
+        private bool IsCapableToSetNewCurrentLayer()
+        {
+            if (!_isInited || _currentLayer != null)
+                return false;
+
+            return  true;
+        }
+
+        private void SetUpNewCurrentLayer()
         {
             _currentLayer.transform.position = _startLayerPoisition.position;
+            _currentLayer.SetUpMaterial(new LayerMaterialContext(RandomColorGenerator()));
             _currentLayer.gameObject.SetActive(true);
         }
 
-        public void MoveNewCurrentLayer()
+        private Color RandomColorGenerator()
         {
-            if(_currentLayer != null)
-                return;
-
-            if(!_isMoveLayerEnable)
-                return;
-
-            _isMoveLayerEnable = false;
-            _currentLayer = _pool.GetPool();
-            SetStartPosition();
-
-            // tween animation to move layer
-            StartCoroutine(MoveLayerToPlayer());
-            // Tween.PositionZ(_currentLayer.transform, endValue: _layerMoveEndPoisition.position.z, duration: _moveDuration)
-            //     .OnComplete(() => _currentLayer.Init());
-        }
-
-        private IEnumerator MoveLayerToPlayer()
-        {
-            yield return Tween.PositionZ(_currentLayer.transform, endValue: _layerMoveEndPoisition.position.z, duration: _moveDuration)
-                .ToYieldInstruction();
-
-            // .OnComplete(() => _currentLayer.Init();
-            _currentLayer.Init();
-            
-            // while(_currentLayer.transform.position.z != _layerMoveEndPoisition.position.z)
-            // {
-            //     _currentLayer.transform.position = new Vector3(
-            //         _currentLayer.transform.position.x, 
-            //         _currentLayer.transform.position.y, 
-            //         _currentLayer.transform.position.z - 1f);
-            //         yield return new WaitForSeconds(_strengthMove);
-            // }
-            //_currentLayer.Init();
+            return Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         }
     }
 }

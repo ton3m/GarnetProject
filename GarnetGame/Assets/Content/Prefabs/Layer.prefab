@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _material: {fileID: 6247598402003148829}
   _shakeStrength: 0.5
   _shakeDuration: 0.5
   _shakeFrequency: 10

@@ -11,6 +11,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
             for (int i = 0; i < poolSize; i++)
             {
                 Layer layerObject = GameObject.Instantiate(prefabToPool, Vector3.zero, Quaternion.identity, parent);
+                
                 layerObject.gameObject.SetActive(false);
                 _layers[i] = layerObject;
             }

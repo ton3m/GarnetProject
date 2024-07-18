@@ -1,6 +1,8 @@
+using System;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Damageable;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.InputService;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer;
 
 namespace GarnnetProject
@@ -19,15 +21,16 @@ namespace GarnnetProject
 
         private void Start()
         {
-            _inputHandler.Actions.Gameplay.Click.performed += ctx => ClickPerformed();
+            _inputHandler.Actions.Gameplay.Click.performed += ClickPerformed;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _inputHandler.Actions.Gameplay.Click.performed -= ctx => ClickPerformed();
+            _inputHandler.Actions.Gameplay.Click.performed -= ClickPerformed;
         }
 
-        private void ClickPerformed()
+
+        private void ClickPerformed(InputAction.CallbackContext context)
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             

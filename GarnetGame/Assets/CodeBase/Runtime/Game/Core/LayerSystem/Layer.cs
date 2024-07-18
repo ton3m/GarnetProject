@@ -9,14 +9,22 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
     public class Layer : MonoBehaviour, IDamageable
     {
         public event Action LayerDestroyed;
-
+        
         [SerializeField, Min(1)] private int _maxHealth = 100;
+        [SerializeField] private MeshRenderer _material;
+
+        [Header("Animation Settings")]
         [SerializeField] private float _shakeStrength;
         [SerializeField] private float _shakeDuration;
         [SerializeField] private float _shakeFrequency;
         private Health _health;
         private bool _isDamageable;
 
+        public void SetUpMaterial(LayerMaterialContext layerMaterialContext)
+        {
+            _material.material.color = layerMaterialContext.MaterialColor;
+        }
+            
         public void Init()
         {
             _health = new Health(_maxHealth);
