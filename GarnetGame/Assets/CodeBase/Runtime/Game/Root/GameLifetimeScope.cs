@@ -19,7 +19,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf(); // перенести в AppLifetimeScope
             builder.Register<Inventory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<DamagePopUpController>(Lifetime.Singleton).AsSelf();
 

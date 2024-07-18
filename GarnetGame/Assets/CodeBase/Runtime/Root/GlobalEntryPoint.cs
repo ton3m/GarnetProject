@@ -19,6 +19,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Root
         {
             // глобальные настройки
             // ...
+            Application.targetFrameRate = 60;
 
             _instance = new GlobalEntryPoint();
             _instance.RunGame();
