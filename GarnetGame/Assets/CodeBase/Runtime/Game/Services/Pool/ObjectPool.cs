@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp;
 using UnityEngine;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
 {
-    public class ObjectPool<T> where T : Behaviour
+    public class ObjectPool<T> : IDisposable where T : Behaviour
     {
         private Queue<T> _pool;
+
+        public IEnumerable<DamagePopUp> Pool => (IEnumerable<DamagePopUp>)_pool;
 
         public ObjectPool(T[] objectsToPool)
         {
@@ -34,6 +37,11 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
         {
             _pool.Enqueue(objectToReturn);
             objectToReturn.gameObject.SetActive(false);
+        }
+
+        public void Dispose()
+        {
+            _pool.Clear();
         }
     }
 }

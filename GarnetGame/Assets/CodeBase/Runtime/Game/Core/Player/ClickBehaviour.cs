@@ -1,5 +1,5 @@
-using System;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Damageable;
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.InputService;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +11,14 @@ namespace GarnnetProject
     {
         [SerializeField, Min(0)] private int _damage; // to stat system 
         private IInputHandler _inputHandler;
-        RaycastHit _raycastHit;
+        private DamagePopUpController _popUpController;
+        private RaycastHit _raycastHit;
 
         [Inject]
-        private void Construct(IInputHandler inputHandler)
+        private void Construct(IInputHandler inputHandler, DamagePopUpController popUpController)
         {
             _inputHandler = inputHandler;
+            _popUpController = popUpController;
         }
 
         private void Start()
@@ -29,7 +31,6 @@ namespace GarnnetProject
             _inputHandler.Actions.Gameplay.Click.performed -= ClickPerformed;
         }
 
-
         private void ClickPerformed(InputAction.CallbackContext context)
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -39,6 +40,7 @@ namespace GarnnetProject
                 if (_raycastHit.transform.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.ApplyDamage(_damage);
+                    _popUpController.Show(_raycastHit.point, _damage);
                 }
             }
         }

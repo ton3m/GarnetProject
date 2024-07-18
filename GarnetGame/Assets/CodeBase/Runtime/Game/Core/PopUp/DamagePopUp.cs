@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using PrimeTween;
+using TMPro;
 using UnityEngine;
 
-namespace GarnnetProject
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp
 {
     public class DamagePopUp : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public event Action<DamagePopUp> End;
 
-        // Update is called once per frame
-        void Update()
+        [SerializeField] private TMP_Text _damageText;
+        [SerializeField] private float _yEndPositionOffset;
+
+        public void SetUp(int damage, float lifeTime = 1)
         {
-        
+            _damageText.text = damage.ToString();
+
+            Tween.PositionY(transform, endValue: transform.position.y + _yEndPositionOffset, duration: lifeTime)
+                .OnComplete(() => End?.Invoke(this));
         }
     }
 }
