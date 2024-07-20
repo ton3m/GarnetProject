@@ -25,7 +25,6 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View
             _inventory.InventoryChanged += UpdateView;
 
             _isInventoryActive = false;
-            //_parent.gameObject.SetActive(_isInventoryActive);
         }
 
         private void OnDestroy()
@@ -40,7 +39,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View
             _parent.gameObject.SetActive(_isInventoryActive);
         }
 
-        private void UpdateView()
+        public void UpdateView()
         {
             foreach (Transform child in _parent)
             {

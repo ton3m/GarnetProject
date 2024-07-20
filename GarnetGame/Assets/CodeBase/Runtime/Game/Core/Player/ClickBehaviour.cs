@@ -39,8 +39,10 @@ namespace GarnnetProject
             {
                 if (_raycastHit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.ApplyDamage(_damage);
-                    _popUpController.Show(_raycastHit.point, _damage);
+                    if(damageable.ApplyDamage(_damage))
+                    {
+                        _popUpController.Show(_raycastHit.point, _damage);
+                    }
                 }
             }
         }

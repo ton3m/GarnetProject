@@ -37,17 +37,27 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
             Tween.StopAll(onTarget: transform);
         }
 
-        public void ApplyDamage(int damage)
+        public bool ApplyDamage(int damage)
         {
             if(!_isDamageable)
-                return;
+                return false;
 
-            Debug.Log(transform.name + " Layer hit!");
             _health.Decrease(damage);
 
+            PlayHitAnimation();
+            CheckDestroy();
+
+            return true;
+        }
+
+        private void PlayHitAnimation()
+        {
             var punchDir = new Vector3(Random.Range(-1, 1), Random.Range(-1, 0), Random.Range(-1, 1));
             Tween.PunchLocalPosition(transform, strength: punchDir, duration: _shakeDuration, frequency: _shakeFrequency);
+        }
 
+        private void CheckDestroy()
+        {
             if(_health.CurrentHealth <= 0)
                 LayerDestroyed?.Invoke();
         }

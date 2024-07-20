@@ -19,5 +19,10 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp
             Tween.PositionY(transform, endValue: transform.position.y + _yEndPositionOffset, duration: lifeTime)
                 .OnComplete(() => End?.Invoke(this));
         }
+
+        private void OnDisable()
+        {
+            Tween.StopAll(onTarget: transform);
+        }
     }
 }

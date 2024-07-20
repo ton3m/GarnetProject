@@ -1,3 +1,4 @@
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
         [SerializeField] private GameObject _shopPanel;
         [SerializeField] private Button _openPanelButton;
         [SerializeField] private Button _closePanelButton;
+        [SerializeField] private InventoryViewController _inventoryViewController;
 
         private void Start()
         {
@@ -27,6 +29,8 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
             _shopPanel.SetActive(true);
             _openPanelButton.gameObject.SetActive(false);
             _closePanelButton.gameObject.SetActive(true);
+
+           _inventoryViewController.UpdateView();
         }
 
         public void ClosePanel()
