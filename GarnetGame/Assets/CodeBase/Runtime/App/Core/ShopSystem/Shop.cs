@@ -1,8 +1,8 @@
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem;
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem;
 using UnityEngine;
 using VContainer;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
+namespace GarnnetProject.Assets.CodeBase.Runtime.App.Core.ShopSystem
 {
     public class Shop : MonoBehaviour
     {

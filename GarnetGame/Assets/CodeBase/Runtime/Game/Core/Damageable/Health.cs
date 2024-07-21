@@ -5,9 +5,6 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Damageable
 {
     public class Health
     {
-        public event Action Decresed;
-        public event Action Increased;
-
         private int _currentHealth;
 
         public int CurrentHealth

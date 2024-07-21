@@ -1,5 +1,6 @@
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem;
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem;
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem.View;
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.ShopSystem;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

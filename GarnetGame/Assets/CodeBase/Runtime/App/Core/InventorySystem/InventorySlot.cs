@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem
+namespace GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem
 {
     public class InventorySlot
     {
@@ -9,27 +9,46 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem
         public int Quantity
         {
             get => _quantity;
-            private set => _quantity = Mathf.Clamp(value, 0, 100);
         }
+
+        public int MaxQuantity => Item.MaxQuantity;
 
         public Item Item { get; }
 
-        public InventorySlot(Item item)
+        public InventorySlot(Item item, int startQuantity = 1)
         {
             Item = item;
-            _quantity = 1;
+
+            if(startQuantity > 0)
+                _quantity = startQuantity;
+            else
+                _quantity = 0;
         }
 
-        public void IncreaseCount(int count)
+        public bool TryIncreaseCount(int count)
         {
-            if (count > 0)
-                Quantity += count;
+            return TryUpdateQuantity(Quantity + count);
         }
 
-        public void DecreaseCount(int count)
+        public bool TryDecreaseCount(int count)
         {
-            if (count > 0)
-                Quantity -= count;
+            return TryUpdateQuantity(Quantity - count);
+        }
+
+        private bool TryUpdateQuantity(int value)
+        {
+            if (value < 0)
+                return false;
+
+            int clampedValue = Mathf.Clamp(value, 0, MaxQuantity);
+
+            if (clampedValue != _quantity)
+            {
+                _quantity = clampedValue;
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

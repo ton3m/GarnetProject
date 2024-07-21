@@ -1,8 +1,9 @@
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.InputService;
 using UnityEngine;
 using VContainer;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View
+namespace GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem.View
 {
     public class InventoryViewController : MonoBehaviour
     {

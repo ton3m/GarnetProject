@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5abdf5ac2a4440eb8002d52f5b73e75, type: 3}
-  m_Name: First
+  m_Script: {fileID: 11500000, guid: f74f4cd9413df1f469113a0643922758, type: 3}
+  m_Name: Player Default Config
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 1
-  <MaxQuantity>k__BackingField: 5
-  <GamePrefab>k__BackingField: {fileID: 0}
-  <Icon>k__BackingField: {fileID: 21300000, guid: e577f30c6bd976a429addedf4c4ad662,
-    type: 3}
+  <State>k__BackingField:
+    ClickDamage: 15

@@ -2,7 +2,6 @@ using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Constants;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.SceneLoad;
 using GarnnetProject.Assets.CodeBase.Runtime.Root;
-using System;
 using UnityEngine;
 using VContainer;
 
@@ -10,8 +9,6 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        public event Action GoToMainAppSceneRequested;
-        
         [SerializeField] private UIGameplayRootView _sceneUIRootPrefab;
         [SerializeField] private CaveRunner _caveRunner;
 

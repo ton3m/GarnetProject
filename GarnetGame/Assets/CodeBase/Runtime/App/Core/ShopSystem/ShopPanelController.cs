@@ -1,8 +1,8 @@
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem.View;
+using GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem.View;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
+namespace GarnnetProject.Assets.CodeBase.Runtime.App.Core.ShopSystem
 {
     public class ShopPanelController : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
             _openPanelButton.onClick.AddListener(OpenPanel);
             _closePanelButton.onClick.AddListener(ClosePanel);
         }
-        
+
         private void OnDisable()
         {
             _openPanelButton.onClick.RemoveAllListeners();
@@ -30,7 +30,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.ShopSystem
             _openPanelButton.gameObject.SetActive(false);
             _closePanelButton.gameObject.SetActive(true);
 
-           _inventoryViewController.UpdateView();
+            _inventoryViewController.UpdateView();
         }
 
         public void ClosePanel()

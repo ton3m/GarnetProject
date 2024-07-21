@@ -3,6 +3,8 @@ using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem;
 using UnityEngine;
 using PrimeTween;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool;
+using VContainer;
+using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.GlobalConfigs;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
 {
@@ -12,32 +14,26 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
         [SerializeField] private Transform _layerParent;
         [SerializeField] private Transform _startLayerPoisition;
         [SerializeField] private Transform _layerMoveEndPoisition;
-        [SerializeField] private float _moveDuration = 0.2f;
-        private Layer _currentLayer;
+        private GlobalCaveSettings _config;
         private ObjectPool<Layer> _pool;
-        private LayerGenerator _generator;
-        private bool _isInited;
+        private Layer _currentLayer;
+        private bool _isPoolInited;
+
+        [Inject]
+        private void Costruct(GlobalCaveSettings globalCaveSettings)
+        {
+            _config = globalCaveSettings;
+        }
 
         public void Begin()
         {
-            if (!_isInited)
-                Init();
-        }
-
-        private void Init() // set with loading curtain
-        {
-            _generator = new LayerGenerator();
-            Layer[] layerObjects = _generator.Create(_layerPrefab, 4, _layerParent);
-
-            foreach (var layer in layerObjects)
+            if (!_isPoolInited)
             {
-                layer.LayerDestroyed += OnLayerDestroyed;
+                CreateLayerPool();
+                _isPoolInited = true;
+
+                SetNewCurrentLayer();
             }
-
-            _pool = new ObjectPool<Layer>(layerObjects);
-            _isInited = true;
-
-            SetNewCurrentLayer();
         }
 
         public void SetNewCurrentLayer()
@@ -54,10 +50,23 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
         {
             SetUpNewCurrentLayer();
 
-            yield return Tween.PositionZ(_currentLayer.transform, endValue: _layerMoveEndPoisition.position.z, duration: _moveDuration)
+            yield return Tween.PositionZ(_currentLayer.transform, endValue: _layerMoveEndPoisition.position.z, duration: _config.LayerMoveDuration)
                 .ToYieldInstruction();
 
             _currentLayer.Init();
+        }
+
+        private void CreateLayerPool()
+        {
+            LayerGenerator generator = new LayerGenerator();
+            Layer[] layerObjects = generator.Create(_layerPrefab, 4, _layerParent);
+
+            foreach (var layer in layerObjects)
+            {
+                layer.LayerDestroyed += OnLayerDestroyed;
+            }
+
+            _pool = new ObjectPool<Layer>(layerObjects);
         }
 
         public void OnLayerDestroyed()
@@ -72,7 +81,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
 
         private bool IsCapableToSetNewCurrentLayer()
         {
-            if (!_isInited || _currentLayer != null)
+            if (!_isPoolInited || _currentLayer != null)
                 return false;
 
             return  true;
@@ -81,13 +90,16 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
         private void SetUpNewCurrentLayer()
         {
             _currentLayer.transform.position = _startLayerPoisition.position;
-            _currentLayer.SetUpMaterial(new LayerMaterialContext(RandomColorGenerator()));
+            _currentLayer.SetUp(GetLayerMaterial());
             _currentLayer.gameObject.SetActive(true);
         }
 
-        private Color RandomColorGenerator()
+        private LayerMaterialContext GetLayerMaterial()
         {
-            return Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            //Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f)
+
+            var t = _config.layerMaterialContexts[Random.Range(0, _config.layerMaterialContexts.Length)];
+            return t;
         }
     }
 }

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5abdf5ac2a4440eb8002d52f5b73e75, type: 3}
-  m_Name: First
+  m_Script: {fileID: 11500000, guid: dd858740ede51ac47ab3e8fd4ccb0d95, type: 3}
+  m_Name: Inventory Setup Data
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 1
-  <MaxQuantity>k__BackingField: 5
-  <GamePrefab>k__BackingField: {fileID: 0}
-  <Icon>k__BackingField: {fileID: 21300000, guid: e577f30c6bd976a429addedf4c4ad662,
-    type: 3}
+  <ItemsToSetup>k__BackingField:
+  - {fileID: 11400000, guid: ac24500001890164d880878e9e2dd332, type: 2}
+  - {fileID: 11400000, guid: d8db3dc3b0ab04145a8be61c2d911e3b, type: 2}

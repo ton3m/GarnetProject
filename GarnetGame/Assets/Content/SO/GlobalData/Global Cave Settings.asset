@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2bc83d7c570a845b9e2433ef5a215f, type: 3}
+  m_Name: Global Cave Settings
+  m_EditorClassIdentifier: 
+  <LayerMoveDuration>k__BackingField: 0.4
+  <layerMaterialContexts>k__BackingField:
+  - MaterialColor: {r: 0.4245283, g: 0.25977027, b: 0, a: 0}
+    MaxHealth: 100
+    Name: Dirt
+  - MaterialColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
+    MaxHealth: 120
+    Name: Stone
+  - MaterialColor: {r: 1, g: 0.94341475, b: 0.24056602, a: 0}
+    MaxHealth: 50
+    Name: Sand

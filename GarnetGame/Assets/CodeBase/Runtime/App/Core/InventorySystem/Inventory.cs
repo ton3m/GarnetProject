@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem
+namespace GarnnetProject.Assets.CodeBase.Runtime.App.Core.InventorySystem
 {
     public class Inventory : IInventory
     {
         public event Action InventoryChanged;
-        public List<InventorySlot> InventorySlots => _slots;
 
         private readonly List<InventorySlot> _slots;
+
+        public IEnumerable<InventorySlot> InventorySlots => _slots;
 
         public Inventory()
         {
@@ -18,26 +19,25 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem
 
         public bool TryAdd(Item itemtoAdd, int count = 1)
         {
-            try
+            foreach (InventorySlot slot in _slots)
             {
-                foreach (InventorySlot slot in _slots)
+                if (itemtoAdd.ID == slot.Item.ID)
                 {
-                    if (itemtoAdd.ID == slot.Item.ID)
+                    if(slot.TryIncreaseCount(count))
                     {
-                        slot.IncreaseCount(count);
                         Debug.Log("Item added, ID:  " + slot.Item.ID + " quantity: " + slot.Quantity);
+                        InventoryChanged?.Invoke();
                         return true;
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
+            }
 
-                _slots.Add(new InventorySlot(itemtoAdd));
-                Debug.Log("New Item added ");
-                return true;
-            }
-            finally
-            {
-                InventoryChanged?.Invoke();
-            }
+            _slots.Add(new InventorySlot(itemtoAdd, count));
+            return true;
         }
 
         public bool TryRemove(Item itemToRemove, int count = 1)
@@ -49,14 +49,16 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.InventorySystem
                     if (count > slot.Quantity)
                         return false;
 
-                    slot.DecreaseCount(count);
-                    Debug.Log("Item removed, ID:  " + slot.Item.ID + " current quantity: " + slot.Quantity);
-
-                    if (slot.Quantity == 0)
-                        _slots.Remove(slot);
-
-                    InventoryChanged?.Invoke();
-                    return true;
+                    if(slot.TryDecreaseCount(count))
+                    {
+                        Debug.Log("Item removed, ID:  " + slot.Item.ID + " current quantity: " + slot.Quantity);
+                        InventoryChanged?.Invoke();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 

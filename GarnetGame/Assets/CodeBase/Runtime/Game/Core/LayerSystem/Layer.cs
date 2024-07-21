@@ -1,6 +1,7 @@
 using System;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Damageable;
 using PrimeTween;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,8 +11,8 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
     {
         public event Action LayerDestroyed;
         
-        [SerializeField, Min(1)] private int _maxHealth = 100;
         [SerializeField] private MeshRenderer _material;
+        [SerializeField] private TMP_Text _materialName;
 
         [Header("Animation Settings")]
         [SerializeField] private float _shakeStrength;
@@ -20,15 +21,17 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
         private Health _health;
         private bool _isDamageable;
 
-        public void SetUpMaterial(LayerMaterialContext layerMaterialContext)
+        public void SetUp(LayerMaterialContext materialContext)
         {
-            _material.material.color = layerMaterialContext.MaterialColor;
+            _material.material.color = materialContext.MaterialColor;
+            _health = new Health(materialContext.MaxHealth);
+            _materialName.text = materialContext.Name;
         }
             
         public void Init()
         {
-            _health = new Health(_maxHealth);
-            _isDamageable = true;
+            if(_health != null)
+                _isDamageable = true;
         }
 
         private void OnDisable()

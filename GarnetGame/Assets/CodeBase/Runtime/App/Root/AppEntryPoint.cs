@@ -1,7 +1,6 @@
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Constants;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.SceneLoad;
 using GarnnetProject.Assets.CodeBase.Runtime.Root;
-using System;
 using UnityEngine;
 using VContainer;
 
@@ -9,8 +8,6 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.App.Root
 {
     public class AppEntryPoint : MonoBehaviour
     {
-        public event Action GoToGameplaySceneRequested;
-
         [SerializeField] private UIAppRootView _sceneUIRootPrefab;
 
         [Inject]
