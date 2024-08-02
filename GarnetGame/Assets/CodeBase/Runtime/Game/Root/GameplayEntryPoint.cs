@@ -1,24 +1,30 @@
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner;
+using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Constants;
+using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.SceneLoad;
 using GarnnetProject.Assets.CodeBase.Runtime.Root;
-using System;
 using UnityEngine;
+using VContainer;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Root
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        public event Action GoToMainAppSceneRequested;
-        
         [SerializeField] private UIGameplayRootView _sceneUIRootPrefab;
+        [SerializeField] private CaveBootstrap _caveRunner;
 
-        public void Run(UIRootView uiRoot)
+        [Inject]
+        public void Run(UIRootView uiRoot, ISceneLoader sceneLoader)
         {
             var uiScene = Instantiate(_sceneUIRootPrefab);
             uiRoot.AttachSceneUI(uiScene.gameObject);
 
             uiScene.GoToMainAppButtonClicked += () =>
             {
-                GoToMainAppSceneRequested?.Invoke();
+                sceneLoader.LoadScene(Scenes.MAIN_APP);
             };
+
+            _caveRunner.InitCave();
+            uiRoot.HideLoadingCurtain();
         }
     }
 }

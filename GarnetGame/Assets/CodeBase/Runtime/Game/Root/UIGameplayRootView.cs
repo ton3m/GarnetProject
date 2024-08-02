@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GarnnetProject
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game
 {
     public class UIGameplayRootView : MonoBehaviour
     {
