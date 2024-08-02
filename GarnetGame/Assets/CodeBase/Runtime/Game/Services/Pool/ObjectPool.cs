@@ -9,7 +9,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
     {
         private Queue<T> _pool;
 
-        public IEnumerable<DamagePopUp> Pool => (IEnumerable<DamagePopUp>)_pool;
+        public IEnumerable<T> Pool => (IEnumerable<T>)_pool;
 
         public ObjectPool(T[] objectsToPool)
         {
@@ -37,6 +37,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
         {
             _pool.Enqueue(objectToReturn);
             objectToReturn.gameObject.SetActive(false);
+            objectToReturn.transform.SetParent(null);
         }
 
         public void Dispose()

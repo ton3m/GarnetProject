@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2bc83d7c570a845b9e2433ef5a215f, type: 3}
   m_Name: Global Cave Settings
   m_EditorClassIdentifier: 
-  <LayerMoveDuration>k__BackingField: 0.4
+  <BaseLayerPrefab>k__BackingField: {fileID: 3680780517739704022, guid: 6bea81902892de346826a3792b2f7f44,
+    type: 3}
+  <BaseOrePrefab>k__BackingField: {fileID: 7761904958064300627, guid: 328b429d92559744fa02020b92a8c2ce,
+    type: 3}
+  <LayerMoveDuration>k__BackingField: 0.7
   <layerMaterialContexts>k__BackingField:
   - MaterialColor: {r: 0.4245283, g: 0.25977027, b: 0, a: 0}
     MaxHealth: 100

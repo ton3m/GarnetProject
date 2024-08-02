@@ -10,7 +10,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
     public class GameplayEntryPoint : MonoBehaviour
     {
         [SerializeField] private UIGameplayRootView _sceneUIRootPrefab;
-        [SerializeField] private CaveRunner _caveRunner;
+        [SerializeField] private CaveBootstrap _caveRunner;
 
         [Inject]
         public void Run(UIRootView uiRoot, ISceneLoader sceneLoader)
@@ -23,7 +23,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
                 sceneLoader.LoadScene(Scenes.MAIN_APP);
             };
 
-            _caveRunner.Begin();
+            _caveRunner.InitCave();
             uiRoot.HideLoadingCurtain();
         }
     }

@@ -1,18 +1,14 @@
 using System;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Damageable;
 using PrimeTween;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
+namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.OreSystem
 {
-    public class Layer : MonoBehaviour, IDamageable
+    public class Ore : MonoBehaviour, IDamageable
     {
-        public event Action<Layer> Destroyed;
-        
-        [SerializeField] private MeshRenderer _material;
-        [SerializeField] private TMP_Text _materialName;
+        public event Action<Ore> Destroyed;
 
         [Header("Animation Settings")]
         [SerializeField] private float _shakeStrength;
@@ -21,22 +17,17 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
         private Health _health;
         private bool _isDamageable;
 
-        public void SetUp(LayerMaterialContext materialContext)
+        public void Init(int maxHealth)
         {
-            _material.material.color = materialContext.MaterialColor;
-            _health = new Health(materialContext.MaxHealth);
-            _materialName.text = materialContext.Name;
-        }
-            
-        public void Init()
-        {
-            if(_health != null)
+            _health = new Health(maxHealth);
+
+            if (_health != null)
                 _isDamageable = true;
         }
 
         public bool ApplyDamage(int damage)
         {
-            if(!_isDamageable)
+            if (!_isDamageable)
                 return false;
 
             _health.Decrease(damage);
@@ -61,7 +52,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem
 
         private void CheckDestroy()
         {
-            if(_health.CurrentHealth <= 0)
+            if (_health.CurrentHealth <= 0)
                 Destroyed?.Invoke(this);
         }
     }

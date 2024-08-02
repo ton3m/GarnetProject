@@ -2,7 +2,6 @@ using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.Player;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.AssetsProvide;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.InputService;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.GlobalConfigs;
 using UnityEngine;
 using VContainer;
@@ -15,7 +14,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game
         [SerializeField] private GameplayEntryPoint _gameplayeEntryPoint;
         [SerializeField] private ClickBehaviour _click;
         [SerializeField] private GlobalCaveSettings _globalCaveSettings;
-        [SerializeField] private CaveRunner _caveRunner;
+        [SerializeField] private CaveBootstrap _caveRunner;
 
         protected override void Configure(IContainerBuilder builder)
         {

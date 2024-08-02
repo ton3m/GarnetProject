@@ -294,7 +294,7 @@ MonoBehaviour:
   _click: {fileID: 848401073}
   _globalCaveSettings: {fileID: 11400000, guid: 27e2a62714f1f2e41bcbc1780186d46b,
     type: 2}
-  _caveRunner: {fileID: 1972526735}
+  _caveRunner: {fileID: 504218372}
 --- !u!4 &39981975
 Transform:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneUIRootPrefab: {fileID: 7438662895384336486, guid: 3dd933a08d6d5274b9be6694e5d38a74,
     type: 3}
-  _caveRunner: {fileID: 1972526735}
+  _caveRunner: {fileID: 504218372}
 --- !u!4 &239372592
 Transform:
   m_ObjectHideFlags: 0
@@ -522,6 +522,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &504218370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504218371}
+  - component: {fileID: 504218372}
+  m_Layer: 0
+  m_Name: CaveRunnerBootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504218371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504218370}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 610618706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &504218372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504218370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e325b1b83c0db1547b019a1cc27c042d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 1746914482}
 --- !u!1 &522794115
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +786,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1972526735}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GarnnetProject.CaveRunner, Assembly-CSharp
         m_MethodName: MoveNewCurrentLayer
         m_Mode: 1
@@ -791,6 +836,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602989238}
   m_CullTransparentMesh: 1
+--- !u!1 &610618705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610618706}
+  m_Layer: 0
+  m_Name: CaveRunSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &610618706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610618705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4689121, y: -1.9245973, z: -0.5482621}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 504218371}
+  - {fileID: 1746914481}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &641884346
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,12 +893,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641884346}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4689121, y: 2.9245973, z: -0.9517379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1972526736}
+  m_Father: {fileID: 1746914481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &709575111
 GameObject:
@@ -1178,7 +1256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becd6aa5d41447c479be9473547a728c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
 --- !u!4 &848401074
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,7 +1457,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1972526735}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GarnnetProject.CaveRunner, Assembly-CSharp
         m_MethodName: Init
         m_Mode: 1
@@ -1461,6 +1538,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1746914480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746914481}
+  - component: {fileID: 1746914482}
+  m_Layer: 0
+  m_Name: CaveRunnerView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1746914481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746914480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2024143956}
+  - {fileID: 641884347}
+  m_Father: {fileID: 610618706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1746914482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746914480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb9007383b5cf647840aff2971cb76c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerStartPoint: {fileID: 2024143956}
+  _layerEndPoint: {fileID: 641884347}
 --- !u!1 &1921886019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,57 +1691,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1972526734
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1972526736}
-  - component: {fileID: 1972526735}
-  m_Layer: 0
-  m_Name: CaveRunner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1972526735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972526734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43893791ccf8a6d478e9e26199b504f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerPrefab: {fileID: 3680780517739704022, guid: 6bea81902892de346826a3792b2f7f44,
-    type: 3}
-  _layerParent: {fileID: 1972526736}
-  _startLayerPoisition: {fileID: 2024143956}
-  _layerMoveEndPoisition: {fileID: 641884347}
---- !u!4 &1972526736
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972526734}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2024143956}
-  - {fileID: 641884347}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2024143955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,12 +1715,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024143955}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 23}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4689121, y: 2.9245973, z: 32.048264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1972526736}
+  m_Father: {fileID: 1746914481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058543300
 GameObject:
@@ -1865,11 +1939,11 @@ SceneRoots:
   - {fileID: 1582159686}
   - {fileID: 39981975}
   - {fileID: 239372592}
-  - {fileID: 741046773}
-  - {fileID: 1972526736}
+  - {fileID: 610618706}
   - {fileID: 357128814}
   - {fileID: 1299392630}
   - {fileID: 522794116}
+  - {fileID: 741046773}
   - {fileID: 2058543304}
   - {fileID: 569223411}
   - {fileID: 1921886023}
