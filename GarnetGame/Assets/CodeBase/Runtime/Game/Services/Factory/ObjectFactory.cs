@@ -18,5 +18,16 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Factory
 
             return createdObjects;
         }
+
+        public void Create<T>(T prefabToCreate, ref T[] array, Transform parent = null) where T : Behaviour
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                T generatedObject = Object.Instantiate(prefabToCreate, Vector3.zero, Quaternion.identity, parent);
+
+                generatedObject.gameObject.SetActive(false);
+                array[i] = generatedObject;
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp;
 using UnityEngine;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
@@ -9,7 +8,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool
     {
         private Queue<T> _pool;
 
-        public IEnumerable<T> Pool => (IEnumerable<T>)_pool;
+        public IEnumerable<T> Pool => _pool;
 
         public ObjectPool(T[] objectsToPool)
         {

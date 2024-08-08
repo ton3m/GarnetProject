@@ -10,18 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e2bc83d7c570a845b9e2433ef5a215f, type: 3}
-  m_Name: Global Cave Settings
+  m_Name: Default Cave Settings
   m_EditorClassIdentifier: 
   <BaseLayerPrefab>k__BackingField: {fileID: 3680780517739704022, guid: 6bea81902892de346826a3792b2f7f44,
     type: 3}
   <LayerMoveDuration>k__BackingField: 0.7
   <LayerMaterialContexts>k__BackingField:
-  - MaterialColor: {r: 1, g: 0.92111665, b: 0.051886797, a: 0}
-    MaxHealth: 75
-    Name: Sand
-  - MaterialColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
-    MaxHealth: 120
-    Name: Stone
-  - MaterialColor: {r: 0.6037736, g: 0.32616156, b: 0, a: 0}
-    MaxHealth: 90
-    Name: Dirt
+  - MaterialColor: {r: 1, g: 1, b: 1, a: 0}
+    MaxHealth: 100
+    Name: Default

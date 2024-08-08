@@ -1,5 +1,4 @@
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.OreSystem;
 using UnityEngine;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.GlobalConfigs
@@ -8,8 +7,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.GlobalConf
     public class GlobalCaveSettings : ScriptableObject
     {
         [field: SerializeField] public Layer BaseLayerPrefab { get; private set; }
-        [field: SerializeField] public Ore BaseOrePrefab { get; private set; }
-        [field: SerializeField] public float LayerMoveDuration { get; private set; } = 0.2f;
-        [field: SerializeField] public LayerMaterialContext[] layerMaterialContexts { get; private set; }
+        [field: SerializeField, Min(0.05f)] public float LayerMoveDuration { get; private set; } = 0.2f;
+        [field: SerializeField] public LayerMaterialContext[] LayerMaterialContexts { get; private set; }
     }
 }

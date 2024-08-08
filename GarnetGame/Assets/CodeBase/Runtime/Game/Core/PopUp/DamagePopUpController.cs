@@ -1,8 +1,8 @@
 using System;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.AssetsProvide;
+using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Factory;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp
 {
@@ -12,18 +12,15 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.PopUp
 
         public DamagePopUpController(IAssetProvider assetProvider)
         {
-            var _popUps = new DamagePopUp[15];
-            var popUpPrefab = assetProvider.Load<DamagePopUp>("DamagePopUp");
+            DamagePopUp[] _popUps = new DamagePopUp[15];
+            
+            DamagePopUp popUpPrefab = assetProvider.Load<DamagePopUp>("DamagePopUp");
 
-            for (int i = 0; i < 15; i++)
-            {
-                DamagePopUp popUpObject = Object.Instantiate(popUpPrefab, Vector3.zero, Quaternion.identity, null);
+            ObjectFactory factory = new ObjectFactory();
+            factory.Create<DamagePopUp>(popUpPrefab, ref _popUps, null);
 
-                popUpObject.gameObject.SetActive(false);
-                _popUps[i] = popUpObject;
-                
-                popUpObject.End += ReturnPopUpToPool;
-            }
+            foreach (var popUp in _popUps)
+                popUp.End += ReturnPopUpToPool;
 
             _pool = new ObjectPool<DamagePopUp>(_popUps);
         }

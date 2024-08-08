@@ -1,5 +1,4 @@
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.LayerSystem;
-using GarnnetProject.Assets.CodeBase.Runtime.Game.Core.OreSystem;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Factory;
 using GarnnetProject.Assets.CodeBase.Runtime.Game.Services.Pool;
 using GarnnetProject.Assets.CodeBase.Runtime.Infrastructure.Utils.GlobalConfigs;
@@ -11,6 +10,7 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
     public class CaveBootstrap : MonoBehaviour
     {
         [SerializeField] private CaveRunnerView _view;
+        [SerializeField] private GlobalCaveSettings _defaultGlobalCaveSettings;
         private GlobalCaveSettings _config;
 
         [Inject]
@@ -21,10 +21,12 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
 
         public void InitCave()
         {
+            ValidateConfigData(ref _config);
+            
             ObjectFactory factory = new ObjectFactory();
 
             var model = new CaveRunnerModel(_config, 
-                CreateLayerPool(factory, _view.transform), CreateOrePool(factory, _view.transform));
+                CreateLayerPool(factory, _view.transform));
 
             _view.Init(model, _config);
         }
@@ -35,11 +37,25 @@ namespace GarnnetProject.Assets.CodeBase.Runtime.Game.Core.CaveRunner
             return new ObjectPool<Layer>(layerObjects);
         }
 
-        private ObjectPool<Ore> CreateOrePool(ObjectFactory factory, Transform oreParent)
+        private void ValidateConfigData(ref GlobalCaveSettings caveSettings)
         {
-            Ore[] oreObjects = factory.Create(_config.BaseOrePrefab, 4, oreParent);
-            return new ObjectPool<Ore>(oreObjects);
-        }
+            if(caveSettings == null)
+            {
+                Debug.LogWarning("Cave Settings field is Null!");
+                caveSettings = _defaultGlobalCaveSettings;
+                return;
+            }
 
+            if(caveSettings.BaseLayerPrefab == null)
+            {
+                Debug.LogWarning("Base Prefab in Cave Settings IS NULL!");
+                caveSettings = _defaultGlobalCaveSettings;
+            }
+            else if(caveSettings.LayerMaterialContexts.Length == 0)
+            {
+                Debug.LogWarning("Layer Material Contexts Count is 0!");
+                caveSettings = _defaultGlobalCaveSettings;
+            }
+        }
     }
 }
